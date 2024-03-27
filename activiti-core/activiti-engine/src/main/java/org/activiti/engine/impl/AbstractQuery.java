@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ import org.activiti.engine.query.QueryProperty;
 
 /**
  * Abstract superclass for all query types.
- * 
+ *
 
  */
 public abstract class AbstractQuery<T extends Query<?, ?>, U> extends ListQueryParameterObject implements Command<Object>, Query<T, U>, Serializable {
@@ -174,7 +174,7 @@ public abstract class AbstractQuery<T extends Query<?, ?>, U> extends ListQueryP
 
   /**
    * Executes the actual query to retrieve the list of results.
-   * 
+   *
    * @param page
    *          used if the results must be paged. If null, no paging will be applied.
    */
@@ -205,7 +205,8 @@ public abstract class AbstractQuery<T extends Query<?, ?>, U> extends ListQueryP
       if (nullHandlingOnOrder.equals(NullHandlingOnOrder.NULLS_FIRST)) {
 
         if (ProcessEngineConfigurationImpl.DATABASE_TYPE_H2.equals(databaseType) || ProcessEngineConfigurationImpl.DATABASE_TYPE_HSQL.equals(databaseType)
-            || ProcessEngineConfigurationImpl.DATABASE_TYPE_POSTGRES.equals(databaseType) || ProcessEngineConfigurationImpl.DATABASE_TYPE_ORACLE.equals(databaseType)) {
+            || ProcessEngineConfigurationImpl.DATABASE_TYPE_POSTGRES.equals(databaseType) || ProcessEngineConfigurationImpl.DATABASE_TYPE_ORACLE.equals(databaseType)
+            || ProcessEngineConfigurationImpl.DATABASE_TYPE_SUNDB.equals(databaseType)) {
           orderBy = orderBy + defaultOrderByClause + " NULLS FIRST";
         } else if (ProcessEngineConfigurationImpl.DATABASE_TYPE_MYSQL.equals(databaseType)) {
           orderBy = orderBy + "isnull(" + column + ") desc," + defaultOrderByClause;
@@ -243,7 +244,7 @@ public abstract class AbstractQuery<T extends Query<?, ?>, U> extends ListQueryP
       return orderBy;
     }
   }
-  
+
   public String getOrderByColumns() {
       return getOrderBy();
   }
