@@ -44,7 +44,7 @@
 	<select id="selectExpiredJobs" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="jobResultMap">
 	  	${limitBefore}
       	select
-      	RES.* ${limitBetween} 
+      	RES.* ${limitBetween}
       	from ${prefix}ACT_RU_JOB RES
     	where RES.LOCK_EXP_TIME_ is not null and RES.LOCK_EXP_TIME_ &lt; #{parameter, jdbcType=TIMESTAMP}
     	${limitAfter}
@@ -187,7 +187,7 @@
 		)
 	</update>
 
-	<!-- See http://stackoverflow.com/questions/4429319/you-cant-specify-target-table-for-update-in-from-clause 
+	<!-- See http://stackoverflow.com/questions/4429319/you-cant-specify-target-table-for-update-in-from-clause
 		Tested this on MySQL 5.6: does NOT use a temporary table (so good, performance) -->
 	<update id="updateJobTenantIdForDeployment" databaseId="mysql"
 			parameterType="java.util.Map">
@@ -203,7 +203,7 @@
 				inner join ${prefix}ACT_RE_PROCDEF P on J.PROC_DEF_ID_ = P.ID_
 				inner join ${prefix}ACT_RE_DEPLOYMENT D on P.DEPLOYMENT_ID_ = D.ID_
 				where D.ID_ = #{deploymentId, jdbcType=VARCHAR}
-	
+
 			) AS tempTask
 
 		)
@@ -236,7 +236,12 @@
 		#{jobType, jdbcType=VARCHAR},
 		#{lockOwner, jdbcType=VARCHAR},
         #{lockExpirationTime, jdbcType=TIMESTAMP},
-		#{exclusive, jdbcType=BOOLEAN},
+    <if test="exclusive">
+      1,
+    </if>
+    <if test="!exclusive">
+      0,
+    </if>
 		#{executionId, jdbcType=VARCHAR},
 		#{processInstanceId, jdbcType=VARCHAR},
 		#{processDefinitionId, jdbcType=VARCHAR},
@@ -276,7 +281,12 @@
 			#{job.jobType, jdbcType=VARCHAR},
 			#{job.lockOwner, jdbcType=VARCHAR},
 			#{job.lockExpirationTime, jdbcType=TIMESTAMP},
-			#{job.exclusive, jdbcType=BOOLEAN},
+      <if test="job.exclusive">
+        1,
+      </if>
+      <if test="!job.exclusive">
+        0,
+      </if>
 			#{job.executionId, jdbcType=VARCHAR},
 			#{job.processInstanceId, jdbcType=VARCHAR},
 			#{job.processDefinitionId, jdbcType=VARCHAR},
@@ -317,7 +327,12 @@
 			#{job.jobType, jdbcType=VARCHAR},
 			#{job.lockOwner, jdbcType=VARCHAR},
 			#{job.lockExpirationTime, jdbcType=TIMESTAMP},
-			#{job.exclusive, jdbcType=BOOLEAN},
+      <if test="job.exclusive">
+        1,
+      </if>
+      <if test="!job.exclusive">
+        0,
+      </if>
 			#{job.executionId, jdbcType=VARCHAR},
 			#{job.processInstanceId, jdbcType=VARCHAR},
 			#{job.processDefinitionId, jdbcType=VARCHAR},

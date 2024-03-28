@@ -15,11 +15,36 @@
       #{businessKey, jdbcType=VARCHAR},
       #{processDefinitionId ,jdbcType=VARCHAR},
       #{activityId ,jdbcType=VARCHAR},
-      #{isActive ,jdbcType=BOOLEAN},
-      #{isConcurrent ,jdbcType=BOOLEAN},
-      #{isScope ,jdbcType=BOOLEAN},
-      #{isEventScope ,jdbcType=BOOLEAN},
-      #{isMultiInstanceRoot, jdbcType=BOOLEAN},
+    <if test="isActive">
+      1,
+    </if>
+    <if test="!isActive">
+      0,
+    </if>
+    <if test="isConcurrent">
+    1,
+  </if>
+    <if test="!isConcurrent">
+      0,
+    </if>
+    <if test="isScope">
+    1,
+  </if>
+    <if test="!isScope">
+      0,
+    </if>
+    <if test="isEventScope">
+    1,
+  </if>
+    <if test="!isEventScope">
+      0,
+    </if>
+    <if test="isMultiInstanceRoot">
+    1,
+  </if>
+    <if test="!isMultiInstanceRoot">
+      0,
+    </if>
       #{parentId, jdbcType=VARCHAR},
       #{superExecutionId, jdbcType=VARCHAR},
       #{rootProcessInstanceId, jdbcType=VARCHAR},
@@ -28,7 +53,12 @@
       #{name, jdbcType=VARCHAR},
       #{startTime, jdbcType=TIMESTAMP},
       #{startUserId, jdbcType=VARCHAR},
-      #{isCountEnabled, jdbcType=BOOLEAN},
+    <if test="isCountEnabled">
+      1,
+    </if>
+    <if test="!isCountEnabled">
+      0,
+    </if>
       #{eventSubscriptionCount, jdbcType=INTEGER},
       #{taskCount, jdbcType=INTEGER},
       #{jobCount, jdbcType=INTEGER},
@@ -51,11 +81,36 @@
          #{execution.businessKey, jdbcType=VARCHAR},
          #{execution.processDefinitionId ,jdbcType=VARCHAR},
          #{execution.activityId ,jdbcType=VARCHAR},
-         #{execution.isActive ,jdbcType=BOOLEAN},
-         #{execution.isConcurrent ,jdbcType=BOOLEAN},
-         #{execution.isScope ,jdbcType=BOOLEAN},
-         #{execution.isEventScope ,jdbcType=BOOLEAN},
-         #{execution.isMultiInstanceRoot, jdbcType=BOOLEAN},
+        <if test="execution.isActive">
+          1,
+        </if>
+        <if test="!execution.isActive">
+          0,
+        </if>
+        <if test="execution.isConcurrent">
+          1,
+        </if>
+        <if test="!execution.isConcurrent">
+          0,
+        </if>
+        <if test="execution.isScope">
+          1,
+        </if>
+        <if test="!execution.isScope">
+          0,
+        </if>
+        <if test="execution.isEventScope">
+          1,
+        </if>
+        <if test="!execution.isEventScope">
+          0,
+        </if>
+        <if test="execution.isMultiInstanceRoot">
+          1,
+        </if>
+        <if test="!execution.isMultiInstanceRoot">
+          0,
+        </if>
          #{execution.parentId, jdbcType=VARCHAR},
          #{execution.superExecutionId, jdbcType=VARCHAR},
          #{execution.rootProcessInstanceId, jdbcType=VARCHAR},
@@ -64,7 +119,12 @@
          #{execution.name, jdbcType=VARCHAR},
          #{execution.startTime, jdbcType=TIMESTAMP},
          #{execution.startUserId, jdbcType=VARCHAR},
-         #{execution.isCountEnabled, jdbcType=BOOLEAN},
+        <if test="execution.isCountEnabled">
+          1,
+        </if>
+        <if test="!execution.isCountEnabled">
+          0,
+        </if>
          #{execution.eventSubscriptionCount, jdbcType=INTEGER},
          #{execution.taskCount, jdbcType=INTEGER},
          #{execution.jobCount, jdbcType=INTEGER},
@@ -88,11 +148,36 @@
              #{execution.businessKey, jdbcType=VARCHAR},
              #{execution.processDefinitionId ,jdbcType=VARCHAR},
              #{execution.activityId ,jdbcType=VARCHAR},
-             #{execution.isActive ,jdbcType=BOOLEAN},
-             #{execution.isConcurrent ,jdbcType=BOOLEAN},
-             #{execution.isScope ,jdbcType=BOOLEAN},
-             #{execution.isEventScope ,jdbcType=BOOLEAN},
-             #{execution.isMultiInstanceRoot, jdbcType=BOOLEAN},
+        <if test="execution.isActive">
+          1,
+        </if>
+        <if test="!execution.isActive">
+          0,
+        </if>
+        <if test="execution.isConcurrent">
+          1,
+        </if>
+        <if test="!execution.isConcurrent">
+          0,
+        </if>
+        <if test="execution.isScope">
+          1,
+        </if>
+        <if test="!execution.isScope">
+          0,
+        </if>
+        <if test="execution.isEventScope">
+          1,
+        </if>
+        <if test="!execution.isEventScope">
+          0,
+        </if>
+        <if test="execution.isMultiInstanceRoot">
+          1,
+        </if>
+        <if test="!execution.isMultiInstanceRoot">
+          0,
+        </if>
              #{execution.parentId, jdbcType=VARCHAR},
              #{execution.superExecutionId, jdbcType=VARCHAR},
              #{execution.rootProcessInstanceId, jdbcType=VARCHAR},
@@ -101,7 +186,12 @@
              #{execution.name, jdbcType=VARCHAR},
              #{execution.startTime, jdbcType=TIMESTAMP},
              #{execution.startUserId, jdbcType=VARCHAR},
-             #{execution.isCountEnabled, jdbcType=BOOLEAN},
+        <if test="execution.isCountEnabled">
+          1,
+        </if>
+        <if test="!execution.isCountEnabled">
+          0,
+        </if>
              #{execution.eventSubscriptionCount, jdbcType=INTEGER},
              #{execution.taskCount, jdbcType=INTEGER},
              #{execution.jobCount, jdbcType=INTEGER},
@@ -122,17 +212,53 @@
       BUSINESS_KEY_ = #{businessKey, jdbcType=VARCHAR},
       PROC_DEF_ID_ = #{processDefinitionId, jdbcType=VARCHAR},
       ACT_ID_ = #{activityId, jdbcType=VARCHAR},
-      IS_ACTIVE_ = #{isActive, jdbcType=BOOLEAN},
-      IS_CONCURRENT_ = #{isConcurrent, jdbcType=BOOLEAN},
-      IS_SCOPE_ = #{isScope, jdbcType=BOOLEAN},
-      IS_EVENT_SCOPE_ = #{isEventScope, jdbcType=BOOLEAN},
-      IS_MI_ROOT_ = #{isMultiInstanceRoot, jdbcType=BOOLEAN},
+      IS_ACTIVE_ =
+    <if test="isActive">
+      1,
+    </if>
+    <if test="!isActive">
+      0,
+    </if>
+      IS_CONCURRENT_ =
+    <if test="isConcurrent">
+      1,
+    </if>
+    <if test="!isConcurrent">
+      0,
+    </if>
+      IS_SCOPE_ =
+    <if test="isScope">
+      1,
+    </if>
+    <if test="!isScope">
+      0,
+    </if>
+      IS_EVENT_SCOPE_ =
+    <if test="isEventScope">
+      1,
+    </if>
+    <if test="!isEventScope">
+      0,
+    </if>
+      IS_MI_ROOT_ =
+    <if test="isMultiInstanceRoot">
+      1,
+    </if>
+    <if test="!isMultiInstanceRoot">
+      0,
+    </if>
       PARENT_ID_ = #{parentId, jdbcType=VARCHAR},
       SUPER_EXEC_ = #{superExecutionId, jdbcType=VARCHAR},
       ROOT_PROC_INST_ID_ = #{rootProcessInstanceId, jdbcType=VARCHAR},
       SUSPENSION_STATE_ = #{suspensionState, jdbcType=INTEGER},
       NAME_ = #{name, jdbcType=VARCHAR},
-      IS_COUNT_ENABLED_ = #{isCountEnabled, jdbcType=BOOLEAN},
+      IS_COUNT_ENABLED_ =
+    <if test="isCountEnabled">
+      1,
+    </if>
+    <if test="!isCountEnabled">
+      0,
+    </if>
       EVT_SUBSCR_COUNT_ = #{eventSubscriptionCount, jdbcType=INTEGER},
       TASK_COUNT_ = #{taskCount, jdbcType=INTEGER},
       JOB_COUNT_ = #{jobCount, jdbcType=INTEGER},
@@ -196,7 +322,12 @@
 
   <update id="updateExecutionRelatedEntityCountEnabled" parameterType="boolean">
     update ${prefix}ACT_RU_EXECUTION
-    set IS_COUNT_ENABLED_ = #{parameter, jdbcType=BOOLEAN}
+    set IS_COUNT_ENABLED_ =  <if test="parameter">
+    1
+  </if>
+    <if test="!parameter">
+      0
+    </if>
   </update>
 
   <!-- EXECUTION DELETE -->
